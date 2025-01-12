@@ -24,12 +24,12 @@ export const Hero = () => {
         }
     };
 
-    // useEffect(() => {
-    //     const handleMouseEnter = () => {
-    //         fetchSelectedClips();
-    //     };
-    //     document.addEventListener("mouseenter", handleMouseEnter);
-    // }, []);
+    useEffect(() => {
+        const handleMouseEnter = () => {
+            fetchSelectedClips();
+        };
+        document.addEventListener("mouseenter", handleMouseEnter);
+    }, []);
     return (
         <div className='h-1/3 p-3 border'>
             {clips?.map((clip: any, index: any) => (
