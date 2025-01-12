@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const emojiIcons = [
     { icon: "😀", name: "grinning-face" },
@@ -35,20 +35,28 @@ const emojiIcons = [
 
 
 export const Service = () => {
+
+    const [service, setService] = useState()
+
+    const selctService = (e: any) => {
+        setService(e.name)
+    }
+
     return (
         <div className='group grid grid-cols-12 h-4/6'>
             <div className='description border col-span-11 p-4'>
                 <h1 className="text-2xl font-bold">Emoji Description</h1>
                 <p>Hover on an emoji to see its name and enjoy the animations!</p>
+                <p>{service}</p>
             </div>
             <div className='services border col-span-1 flex flex-col justify-between items-center gap-3 p-3 overflow-y-scroll no-scrollbar bg-[rgba(246,188,255,0.09)] shadow-md backdrop-blur-lg'>
                 {emojiIcons?.map((e) => (
-                    <p>{e.icon}</p>
+                    <p className='cursor-pointer' onClick={() => selctService(e)}>{e.icon}</p>
                 ))}
             </div>
             <div className='send col-span-12 border'>
                 like
             </div>
-        </div>
+        </div >
     )
 }
