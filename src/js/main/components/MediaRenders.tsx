@@ -1,7 +1,7 @@
 export const VideoRenderer = ({ fileData }: any) => {
   const videoSrc = `data:video/mp4;base64,${fileData}`;
   return (
-      <video controls style={{ width: "200px", height: "120px" }}>
+      <video controls style={{ width: "600px", height: "150px" }}>
           <source src={videoSrc} type="video/mp4" />
           Your browser does not support the video tag.
       </video>
