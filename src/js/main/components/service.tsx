@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 
+import { evalTS } from "../../lib/utils/bolt";
+
 const emojiIcons = [
     { icon: "😀", name: "grinning-face" },
     { icon: "🎵", name: "musical-note" },
@@ -36,11 +38,24 @@ const emojiIcons = [
 
 export const Service = () => {
 
+    const logo = "D:/breeth/premierpro-breeth-cep/src/js/main/assets/logo.png";
+
     const [service, setService] = useState()
 
     const selctService = (e: any) => {
         setService(e.name)
     }
+
+    const handleSetFile = async () => {
+        if (!logo) {
+            alert("No file loaded!");
+            return;
+        }
+
+        // Call ExtendScript function in Premiere Pro
+        await evalTS("importAndSetFile", logo);
+    };
+
 
     return (
         <div className='group grid grid-cols-12 h-4/6'>
@@ -54,8 +69,9 @@ export const Service = () => {
                     <p className='cursor-pointer' onClick={() => selctService(e)}>{e.icon}</p>
                 ))}
             </div>
-            <div className='send col-span-12 border'>
-                like
+            <div className='send col-span-12 border flex flex-row justify-around'>
+                <button type="button" className="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Like</button>
+                <button onClick={handleSetFile} type="button" className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Set File</button>
             </div>
         </div >
     )
