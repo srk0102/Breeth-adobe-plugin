@@ -3,7 +3,7 @@ export const getSelectedClips = () => {
     try {
         if (app.project.activeSequence) {
             var sequence = app.project.activeSequence;
-            var selectedClips:any = [];
+            var selectedClips: any = [];
             var videoTracks = sequence.videoTracks;
             var audioTracks = sequence.audioTracks;
 
@@ -67,6 +67,40 @@ export const readFile = (filePath: string) => {
             alert('File not found.');
         }
     } catch (e: any) {
+        alert(JSON.stringify({ error: e.message }));
+    }
+}
+
+export const importAndSetFile = (filePath: string) => {
+    try {
+        var project = app.project;
+        var activeSequence = project.activeSequence;
+
+        if (!activeSequence) {
+            alert("No active sequence found!");
+            return;
+        }
+        var importFile = new File(filePath);
+        var importResult = project.importFiles([importFile.fsName], false, project.rootItem, false);
+
+        if (!importResult) {
+            alert("File import failed!");
+            return;
+        }
+
+        var importedItem = project.rootItem.children[project.rootItem.children.numItems - 1];
+
+        var videoTrack = activeSequence.videoTracks[0];
+        var playheadTime = activeSequence.getPlayerPosition();
+
+        if (videoTrack) {
+            videoTrack.insertClip(importedItem, playheadTime);
+            alert("File added to timeline successfully!");
+        } else {
+            alert("No available video track found.");
+        }
+    }
+    catch (e: any) {
         alert(JSON.stringify({ error: e.message }));
     }
 }
