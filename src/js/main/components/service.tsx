@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { evalTS } from "../../lib/utils/bolt";
 
 const emojiIcons = [
-    { icon: "😀", name: "grinning-face" },
+    { icon: "😀", name: "Eleven Labs" },
     { icon: "🎵", name: "musical-note" },
     { icon: "🎥", name: "movie-camera" },
     { icon: "🖼️", name: "framed-picture" },
@@ -40,7 +40,7 @@ export const Service = () => {
 
     const logo = "D:/breeth/premierpro-breeth-cep/src/js/main/assets/logo.png";
 
-    const [service, setService] = useState()
+    const [service, setService] = useState("select any service to proceed")
 
     const selctService = (e: any) => {
         setService(e.name)
@@ -60,9 +60,8 @@ export const Service = () => {
     return (
         <div className='group grid grid-cols-12 h-4/6'>
             <div className='description border col-span-11 p-4'>
-                <h1 className="text-2xl font-bold">Emoji Description</h1>
-                <p>Hover on an emoji to see its name and enjoy the animations!</p>
-                <p>{service}</p>
+                <h1 className="text-2xl font-bold">{service}</h1>
+                <p></p>
             </div>
             <div className='services border col-span-1 flex flex-col justify-between items-center gap-3 p-3 overflow-y-scroll no-scrollbar bg-[rgba(246,188,255,0.09)] shadow-md backdrop-blur-lg'>
                 {emojiIcons?.map((e) => (
