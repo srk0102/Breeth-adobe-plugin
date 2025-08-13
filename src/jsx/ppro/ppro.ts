@@ -1,4 +1,3 @@
-
 export const getSelectedClips = () => {
     try {
         if (app.project.activeSequence) {
@@ -55,6 +54,30 @@ export const getSelectedClips = () => {
     }
 }
 
+export const getProjectDirectory = () => {
+    if (app.project && app.project.path) {
+        var fullPath = app.project.path;
+
+        // Replace backslashes with forward slashes to standardize
+        fullPath = fullPath.replace(/\\/g, "/");
+
+        // Find last slash to extract directory path
+        var lastSlashIndex = fullPath.lastIndexOf("/");
+
+        if (lastSlashIndex === -1) {
+            // Something is wrong if no slash is found
+            return "";
+        }
+
+        // Extract directory (excluding filename)
+        var projectDir = fullPath.substring(0, lastSlashIndex);
+
+        return projectDir;
+    }
+
+    return "";
+}
+
 export const readFile = (filePath: string) => {
     try {
         var file = new File(filePath);
@@ -94,7 +117,7 @@ export const importAndSetFile = (filePath: string) => {
         var playheadTime = activeSequence.getPlayerPosition();
 
         if (videoTrack) {
-            videoTrack.insertClip(importedItem, playheadTime);
+            videoTrack.insertClip(importedItem, playheadTime.seconds);
             alert("File added to timeline successfully!");
         } else {
             alert("No available video track found.");
@@ -102,5 +125,30 @@ export const importAndSetFile = (filePath: string) => {
     }
     catch (e: any) {
         alert(JSON.stringify({ error: e.message }));
+    }
+}
+
+export const importFileIntoProject = (filePath: string) => {
+    try {
+        if (!filePath) {
+            return "Invalid file path";
+        }
+        var file = new File(filePath);
+        if (!file.exists) {
+            return `File does not exist: ${filePath}`;
+        }
+        if (!app.project) {
+            return "No project available";
+        }
+
+        var importResult = app.project.importFiles([filePath], true, app.project.rootItem, false);
+
+        if (importResult === true) {
+            return `File imported successfully: ${filePath}`;
+        } else {
+            return `Failed to import file: ${filePath} (importResult: ${importResult})`;
+        }
+    } catch (error: any) {
+        return `Error importing file: ${String(error.message)}`;
     }
 }

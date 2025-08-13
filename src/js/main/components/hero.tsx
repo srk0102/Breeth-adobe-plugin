@@ -10,6 +10,7 @@ import { CarouselWithContent } from './carousel'
 export const Hero = () => {
   const [clips, setClips] = useState<any>([]);
   const [data, setData] = useState<any>();
+  
   const fetchSelectedClips = async () => {
     try {
       let selectedClips = await evalTS("getSelectedClips");

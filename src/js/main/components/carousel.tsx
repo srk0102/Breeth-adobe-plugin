@@ -1,4 +1,4 @@
-import { Carousel, Typography, Button } from "@material-tailwind/react";
+import { Carousel } from "@material-tailwind/react";
 
 import { MediaRenderer } from "./MideaRenderer";
 
@@ -7,7 +7,12 @@ export function CarouselWithContent(props: any) {
     const { clips } = props;
 
     return (
-        <Carousel className="rounded-xl">
+        <Carousel
+            className="rounded-xl"
+            placeholder={null}
+            onPointerEnterCapture={() => {}}
+            onPointerLeaveCapture={() => {}}
+        >
             {clips?.map((clip: any) => (
                 <div className="relative h-full w-full">
                     {clip.fileData && (
