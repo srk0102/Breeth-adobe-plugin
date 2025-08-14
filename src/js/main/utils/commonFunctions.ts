@@ -1,6 +1,22 @@
 import axios from "axios";
 import { evalTS } from "../../lib/utils/bolt";
 
+const fileBufferCache: Map<string, string> = new Map();
+
+export const getFileBufferBase64 = async (filePath: string, forceRefresh: boolean = false): Promise<string> => {
+  if (!forceRefresh && fileBufferCache.has(filePath)) {
+    return fileBufferCache.get(filePath)!;
+  }
+
+  const result = await window.cep.fs.readFile(filePath, window.cep.encoding.Base64);
+  if (result.err === 0) {
+    const data = result.data as string;
+    fileBufferCache.set(filePath, data);
+    return data;
+  }
+  throw new Error("Failed to read file. Error code: " + result.err);
+};
+
 export const uploadFileToBackend = async (filePath: string) => {
     const fileData = window.cep.fs.readFile(filePath, window.cep.encoding.Base64);
     if (fileData.err !== 0) {
@@ -29,12 +45,8 @@ export const uploadFileToBackend = async (filePath: string) => {
 
 export const getTheFileData = async (filePath: string) => {
     try {
-        const result = await window.cep.fs.readFile(filePath, window.cep.encoding.Base64);
-        if (result.err === 0) {
-            return result.data;
-        } else {
-            throw new Error("Failed to read file. Error code: " + result.err);
-        }
+        // Deprecated in favor of getFileBufferBase64 (kept for backwards-compat)
+        return await getFileBufferBase64(filePath);
     } catch (error) {
         console.error("Error reading file:", error);
         throw error;

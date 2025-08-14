@@ -2,55 +2,63 @@ export const getSelectedClips = () => {
     try {
         if (app.project.activeSequence) {
             var sequence = app.project.activeSequence;
-            var selectedClips: any = [];
+            var selectedClips = [];
             var videoTracks = sequence.videoTracks;
             var audioTracks = sequence.audioTracks;
-
-            // Loop through video tracks
-            for (var i = 0; i < videoTracks.numTracks; i++) {
-                var track = videoTracks[i];
-                for (var j = 0; j < track.clips.numItems; j++) {
-                    var clip = track.clips[j];
-                    if (clip.isSelected()) {
-                        selectedClips.push({
-                            name: clip.name,
-                            type: "video",
-                            timelineInpoint: clip.start.seconds,
-                            timelineoutPoint: clip.end.seconds,
-                            assetInpoint: clip.inPoint.seconds,
-                            assetOutpoint: clip.outPoint.seconds,
-                            assentDuration: clip.duration.seconds,
-                            filePath: clip.projectItem.getMediaPath(),
-                        });
+            var maxTracks = Math.max(videoTracks.numTracks, audioTracks.numTracks);
+            
+            // Single loop to process both video and audio tracks
+            for (var i = 0; i < maxTracks; i++) {
+                // Process video track if it exists
+                if (i < videoTracks.numTracks) {
+                    var videoTrack = videoTracks[i];
+                    for (var j = 0; j < videoTrack.clips.numItems; j++) {
+                        var videoClip = videoTrack.clips[j];
+                        if (videoClip.isSelected()) {
+                            selectedClips[selectedClips.length] = {
+                                name: videoClip.name,
+                                type: "video",
+                                timelineInpoint: videoClip.start.seconds,
+                                timelineoutPoint: videoClip.end.seconds,
+                                assetInpoint: videoClip.inPoint.seconds,
+                                assetOutpoint: videoClip.outPoint.seconds,
+                                assetDuration: videoClip.duration.seconds,
+                                filePath: videoClip.projectItem.getMediaPath(),
+                                trackIndex: i
+                            };
+                        }
+                    }
+                }
+                
+                // Process audio track if it exists
+                if (i < audioTracks.numTracks) {
+                    var audioTrack = audioTracks[i];
+                    for (var k = 0; k < audioTrack.clips.numItems; k++) {
+                        var audioClip = audioTrack.clips[k];
+                        if (audioClip.isSelected()) {
+                            selectedClips[selectedClips.length] = {
+                                name: audioClip.name,
+                                type: "audio",
+                                timelineInpoint: audioClip.start.seconds,
+                                timelineoutPoint: audioClip.end.seconds,
+                                assetInpoint: audioClip.inPoint.seconds,
+                                assetOutpoint: audioClip.outPoint.seconds,
+                                assetDuration: audioClip.duration.seconds,
+                                filePath: audioClip.projectItem.getMediaPath(),
+                                trackIndex: i
+                            };
+                        }
                     }
                 }
             }
 
-            for (var i = 0; i < audioTracks.numTracks; i++) {
-                var track = audioTracks[i];
-                for (var j = 0; j < track.clips.numItems; j++) {
-                    var clip = track.clips[j];
-                    if (clip.isSelected()) {
-                        selectedClips.push({
-                            name: clip.name,
-                            type: "audio",
-                            timelineInpoint: clip.start.seconds,
-                            timelineoutPoint: clip.end.seconds,
-                            assetInpoint: clip.inPoint.seconds,
-                            assetOutpoint: clip.outPoint.seconds,
-                            assentDuration: clip.duration.seconds,
-                            filePath: clip.projectItem.getMediaPath(),
-                        });
-                    }
-                }
-            }
-
-            return selectedClips
+            return selectedClips;
         } else {
-            return []
+            return [];
         }
-    } catch (e: any) {
-        alert(JSON.stringify({ error: e.message }));
+    } catch (e:any) {
+        alert("Error getting selected clips: " + String(e.message || e));
+        return [];
     }
 }
 
