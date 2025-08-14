@@ -1,8 +1,6 @@
-import React, { useState } from 'react'
-
-import { evalTS } from "../../lib/utils/bolt";
-
-import { ElvenLabs } from './elvenLabs';
+import { useState } from 'react';
+import { ServiceModel } from './ServiceModel';
+import { GradientIcon } from './common';
 
 const emojiIcons = [
     { icon: "😀", name: "Deep Labs" },
@@ -39,42 +37,69 @@ const emojiIcons = [
 
 
 export const Service = () => {
+    const [service, setService] = useState("select any service to proceed");
 
-    const logo = "D:/breeth/premierpro-breeth-cep/src/js/main/assets/logo.png";
-
-    const [service, setService] = useState("select any service to proceed")
-
-    const selctService = (e: any) => {
-        setService(e.name)
-    }
-
-    const handleSetFile = async () => {
-        if (!logo) {
-            alert("No file loaded!");
-            return;
-        }
-
-        // Call ExtendScript function in Premiere Pro
-        await evalTS("importAndSetFile", logo);
+    const selectService = (serviceItem: { name: string }) => {
+        setService(serviceItem.name);
     };
 
 
     return (
-        <div className='group grid grid-cols-12 h-4/6'>
-            <div className='description border col-span-11 p-4'>
-                <h1 className="text-2xl font-bold text">{service}</h1>
-                <h3 className='font-bold'>Image Ai tool</h3>
-                <ElvenLabs />
+        <div className="h-full w-full p-6">
+            <div className="gradient-border h-full">
+                <div className="gradient-border-inner h-full">
+                    <div className="flex h-full">
+                        <div className="flex-1 p-6">
+                            <div className="mb-6">
+                                <h2 className="text-xl font-bold text-white mb-2">
+                                    {service === "select any service to proceed" ? "AI Services" : service}
+                                </h2>
+                                <p className="text-gray-400 text-sm">
+                                    {service === "select any service to proceed" 
+                                        ? "Choose an AI service from the sidebar to get started" 
+                                        : "Configure your AI-powered workflow"}
+                                </p>
+                            </div>
+                            
+                            {service !== "select any service to proceed" && (
+                                <div className="bg-white/5 rounded-xl p-4 border border-white/10">
+                                    <ServiceModel />
+                                </div>
+                            )}
+                            
+                            {service === "select any service to proceed" && (
+                                <div className="text-center py-8">
+                                    <GradientIcon size="lg" className="w-20 h-20 rounded-2xl mx-auto mb-4" fromColor="from-brand-primary" toColor="to-brand-secondary">
+                                        <span className="text-3xl">🤖</span>
+                                    </GradientIcon>
+                                    <p className="text-gray-300 text-sm">Select a service to begin your AI-powered workflow</p>
+                                </div>
+                            )}
+                        </div>
+                        
+                        {/* Services Sidebar */}
+                        <div className="w-20 border-l border-white/10 bg-white/5 flex flex-col items-center gap-2 p-3 overflow-y-auto no-scrollbar">
+                            <div className="text-xs text-gray-400 font-medium mb-2 rotate-90 whitespace-nowrap">
+                                AI Tools
+                            </div>
+                            {emojiIcons?.map((e, index) => (
+                                <button
+                                    key={index}
+                                    className={`w-12 h-12 cursor-pointer text-lg hover:scale-105 rounded-xl transition-all duration-200 active:scale-95 flex items-center justify-center backdrop-blur-sm ${
+                                        service === e.name 
+                                            ? 'bg-gradient-to-r from-brand-primary to-brand-secondary shadow-lg border border-brand-primary/50' 
+                                            : 'bg-transparent hover:bg-white/10 border border-white/15 hover:border-brand-primary/30'
+                                    }`}
+                                    onClick={() => selectService(e)}
+                                    title={e.name}
+                                >
+                                    {e.icon}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div className='services border col-span-1 flex flex-col justify-between items-center gap-3 p-3 overflow-y-scroll no-scrollbar bg-[rgba(246,188,255,0.09)] shadow-md backdrop-blur-lg'>
-                {emojiIcons?.map((e) => (
-                    <p className='cursor-pointer' onClick={() => selctService(e)}>{e.icon}</p>
-                ))}
-            </div>
-            <div className='send col-span-12 border flex flex-row justify-around'>
-                <button type="button" className="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Like</button>
-                <button onClick={handleSetFile} type="button" className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Send File</button>
-            </div>
-        </div >
+        </div>
     )
 }

@@ -1,0 +1,39 @@
+@theme {
+  /* Brand Colors */
+  --color-brand-primary: #a855f7;
+  --color-brand-secondary: #8b5cf6;
+  --color-brand-accent: #c084fc;
+  
+  /* File Type Colors */
+  --color-file-video: #a855f7;
+  --color-file-audio: #10b981;
+  --color-file-image: #22d3ee;
+  --color-file-unknown: #9ca3af;
+  
+  /* UI State Colors */
+  --color-ui-success: #10b981;
+  --color-ui-warning: #f59e0b;
+  --color-ui-error: #ef4444;
+  --color-ui-info: #3b82f6;
+}
+
+/* Custom gradient utilities for Tailwind 4.1 */
+.bg-brand-gradient {
+  background: linear-gradient(135deg, var(--color-brand-primary), var(--color-brand-secondary));
+}
+
+.bg-brand-gradient-hover:hover {
+  background: linear-gradient(135deg, var(--color-brand-secondary), var(--color-brand-primary));
+}
+
+.bg-audio-gradient {
+  background: linear-gradient(135deg, var(--color-file-audio), var(--color-ui-success));
+}
+
+.bg-video-gradient {
+  background: linear-gradient(135deg, var(--color-file-video), var(--color-brand-accent));
+}
+
+.bg-image-gradient {
+  background: linear-gradient(135deg, var(--color-file-image), #67e8f9);
+}

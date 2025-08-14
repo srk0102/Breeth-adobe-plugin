@@ -1,20 +1,24 @@
-import React from "react";
+
 import { VideoRenderer, ImageRenderer, AudioRenderer } from "./MediaRenders";
+import { audioFormats, videoFormats, imageGifFormats } from '../../lib/utils/ppro';
 
-import {audioFormats, videoFormats, imageGifFormats} from '../../lib/utils/ppro'
+interface MediaRendererProps {
+    filePath: string;
+    fileData: string;
+}
 
-export const MediaRenderer = (props: any) => {
-    const { filePath, fileData: base64Content } = props;
-    // Determine file type based on the extension
-    const fileExtension = filePath.split(".").pop().toLowerCase();
+const MediaRenderer: React.FC<MediaRendererProps> = ({ filePath, fileData }) => {
+    const fileExtension = filePath.split(".").pop()?.toLowerCase() || "";
 
     if (videoFormats.includes(fileExtension)) {
-        return <VideoRenderer fileData={base64Content} />;
+        return <VideoRenderer fileData={fileData} />;
     } else if (imageGifFormats.includes(fileExtension)) {
-        return <ImageRenderer fileData={base64Content} />;
+        return <ImageRenderer fileData={fileData} />;
     } else if (audioFormats.includes(fileExtension)) {
-        return <AudioRenderer fileData={base64Content} />;
+        return <AudioRenderer fileData={fileData} />;
     } else {
-        return <p>Unsupported file type</p>;
+        return <p className="text-gray-400 text-center p-4">Unsupported file type</p>;
     }
 };
+
+export default MediaRenderer;

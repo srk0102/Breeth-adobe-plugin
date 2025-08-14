@@ -48,7 +48,10 @@ if (action) {
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), cep(config)],
+  plugins: [
+    react(),
+    cep(config),
+  ],
   resolve: {
     alias: [{ find: "@esTypes", replacement: path.resolve(__dirname, "src") }],
   },

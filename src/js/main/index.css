@@ -1,6 +1,10 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "./theme.css";
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
+* {
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
 
 .media-container {
   display: flex;
@@ -14,12 +18,11 @@
 .media-audio {
   max-width: 100%;
   max-height: 400px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
 }
 
 .app-container {
-  font-family: Arial, sans-serif;
   text-align: center;
   padding: 20px;
 }
@@ -28,14 +31,60 @@
   clip-path: polygon(0 0, 100% 50%, 100% 100%, 0 50%);
 }
 
+.gradient-border {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(59, 130, 246, 0.3));
+  padding: 1px;
+  border-radius: 12px;
+}
+
+.gradient-border-inner {
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 11px;
+  backdrop-filter: blur(20px);
+}
+
 @layer utilities {
-  /* Hide scrollbar for Chrome, Safari and Opera */
   .no-scrollbar::-webkit-scrollbar {
       display: none;
   }
- /* Hide scrollbar for IE, Edge and Firefox */
   .no-scrollbar {
-      -ms-overflow-style: none;  /* IE and Edge */
-      scrollbar-width: none;  /* Firefox */
-}
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+  }
+  
+  .gradient-border-top-bottom {
+    background-image: 
+      linear-gradient(to right, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%),
+      linear-gradient(to right, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%);
+    background-size: 100% 1px, 100% 1px;
+    background-position: 0 0, 0 100%;
+    background-repeat: no-repeat;
+  }
+  
+  .preview-button {
+    border: 3px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    background-color: transparent;
+  }
+  
+  .menu-button {
+    border: 3px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    box-shadow: rgba(79, 26, 214, 0.3) 0px 0px 0px 0px;
+  }
+  
+  .menu-button:hover {
+    box-shadow: rgba(79, 26, 214, 0.3) 0px 0px 0px 0px;
+  }
+  
+  .service-button {
+    border: 2px solid;
+    border-radius: 10px;
+  }
+
+  /* Force select option colors in dark UI */
+  .select-options option {
+    background-color: #111827; /* gray-900 */
+    color: #ffffff; /* white */
+  }
 }

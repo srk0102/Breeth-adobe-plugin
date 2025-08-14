@@ -1,28 +1,54 @@
 import React from "react";
-import { MenuIcon } from "lucide-react";
-import logo from "../assets/logo.svg";
+import logoDark from "../assets/logo-dark.png";
+import { Menu, Settings, Info, Phone } from "lucide-react";
+import { BRAND_COLORS, UI_COLORS } from "../utils/colors";
+import { DropdownMenu } from "./common";
 
 export const NavBar = () => {
-  const [isOpen, setIsOpen] = React.useState(false);
+  const dropdownItems = [
+    {
+      icon: <Settings className="w-4 h-4" color={UI_COLORS.INFO} />,
+      label: 'Settings',
+      onClick: () => console.log('Settings clicked')
+    },
+    {
+      icon: <Info className="w-4 h-4" color={UI_COLORS.SUCCESS} />,
+      label: 'About',
+      onClick: () => console.log('About clicked')
+    },
+    {
+      icon: <Phone className="w-4 h-4" color={UI_COLORS.WARNING} />,
+      label: 'Support',
+      onClick: () => console.log('Support clicked')
+    }
+  ];
 
   return (
-    <div className="flex flex-row justify-between items-center p-3 bg-[rgba(246,188,255,0.09)] shadow-md backdrop-blur-lg">
-      <img src={logo} className="w-10 h-10" />
-      <h1 className="text-3xl font-black tracking-wider">Breeth</h1>
-      <div className="relative">
-        <button onClick={() => setIsOpen(!isOpen)}>
-          <MenuIcon />
-        </button>
-        {isOpen && (
-          <div className="absolute bg-black mt-4 pb-4">
-            <div className="flex flex-col space-y-4 align-start p-4">
-            <span className="text-light">Settings</span>
-            </div>
-          </div>
-        )}
-       
+    <nav className="flex items-center justify-between px-6 py-4 bg-black/40 backdrop-blur-xl border-b border-white/5">
+      <div className="flex items-center gap-3">
+        <img src={logoDark} alt="Breeth" className="w-8 h-8 object-contain" />
+        <span className="text-xl font-bold tracking-tight text-white">BREETH</span>
       </div>
-      
-    </div>
+
+      <div className="hidden md:flex items-center gap-8">
+        <a href="#" className="text-gray-300 hover:text-brand-primary transition-colors duration-200 text-sm font-medium">
+          Home
+        </a>
+        <a href="#" className="text-gray-300 hover:text-brand-primary transition-colors duration-200 text-sm font-medium">
+          About
+        </a>
+        <a href="#" className="text-gray-300 hover:text-brand-primary transition-colors duration-200 text-sm font-medium">
+          Contact
+        </a>
+      </div>
+
+      <DropdownMenu
+        trigger={
+          <Menu className="w-5 h-5" color={BRAND_COLORS.PRIMARY} />
+        }
+        items={dropdownItems}
+        menuClassName="mt-4"
+      />
+    </nav>
   );
 };
