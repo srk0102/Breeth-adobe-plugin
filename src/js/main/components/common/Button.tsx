@@ -48,7 +48,7 @@ export const Button: React.FC<ButtonProps> = ({
   type = 'button',
   fullWidth = false
 }) => {
-  const baseClasses = 'font-semibold transition duration-150 ease-in-out group flex items-center justify-center gap-3 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:ring-offset-2 focus:ring-offset-black relative overflow-hidden';
+  const baseClasses = 'font-semibold ease-in-out group flex items-center justify-center gap-3 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:ring-offset-2 focus:ring-offset-black relative overflow-hidden transition-colors-opacity';
   const widthClasses = fullWidth ? 'w-full' : '';
   const cursorClasses = disabled ? '' : 'cursor-pointer';
   

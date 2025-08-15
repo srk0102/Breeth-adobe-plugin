@@ -46,8 +46,7 @@ export const Service = () => {
 
     return (
         <div className="h-full w-full p-6">
-            <div className="gradient-border h-full">
-                <div className="gradient-border-inner h-full">
+            <div className="h-full rounded-xl border border-alpha-10 bg-black/80">
                     <div className="flex h-full">
                         <div className="flex-1 p-6">
                             <div className="mb-6">
@@ -62,14 +61,14 @@ export const Service = () => {
                             </div>
                             
                             {service !== "select any service to proceed" && (
-                                <div className="bg-white/5 rounded-xl p-4 border border-white/10">
+                                <div className="bg-white/5 rounded-xl p-4 border border-alpha-10">
                                     <ServiceModel />
                                 </div>
                             )}
                             
                             {service === "select any service to proceed" && (
                                 <div className="text-center py-8">
-                                    <GradientIcon size="lg" className="w-20 h-20 rounded-2xl mx-auto mb-4" fromColor="from-brand-primary" toColor="to-brand-secondary">
+                                    <GradientIcon size="lg" className="w-20 h-20 rounded-2xl mx-auto mb-4" fromColor="bg-brand-gradient">
                                         <span className="text-3xl">🤖</span>
                                     </GradientIcon>
                                     <p className="text-gray-300 text-sm">Select a service to begin your AI-powered workflow</p>
@@ -78,17 +77,17 @@ export const Service = () => {
                         </div>
                         
                         {/* Services Sidebar */}
-                        <div className="w-20 border-l border-white/10 bg-white/5 flex flex-col items-center gap-2 p-3 overflow-y-auto no-scrollbar">
-                            <div className="text-xs text-gray-400 font-medium mb-2 rotate-90 whitespace-nowrap">
+                        <div className="w-20 border-l border-alpha-10 bg-white/5 flex flex-col items-center gap-2 p-3 overflow-y-auto no-scrollbar">
+                            <div className="text-xs text-gray-400 font-medium mb-2 whitespace-nowrap">
                                 AI Tools
                             </div>
                             {emojiIcons?.map((e, index) => (
                                 <button
                                     key={index}
-                                    className={`w-12 h-12 cursor-pointer text-lg hover:scale-105 rounded-xl transition-all duration-200 active:scale-95 flex items-center justify-center backdrop-blur-sm ${
+                                    className={`w-12 h-12 cursor-pointer text-lg hover:scale-105 rounded-xl transition-transform-opacity active:scale-95 flex items-center justify-center ${
                                         service === e.name 
-                                            ? 'bg-gradient-to-r from-brand-primary to-brand-secondary shadow-lg border border-brand-primary/50' 
-                                            : 'bg-transparent hover:bg-white/10 border border-white/15 hover:border-brand-primary/30'
+                                            ? 'bg-brand-gradient shadow-lg border border-brand-primary/50' 
+                                            : 'bg-black/40 hover:bg-black/60 border border-alpha-12 hover:border-brand-primary/30'
                                     }`}
                                     onClick={() => selectService(e)}
                                     title={e.name}
@@ -98,7 +97,6 @@ export const Service = () => {
                             ))}
                         </div>
                     </div>
-                </div>
             </div>
         </div>
     )

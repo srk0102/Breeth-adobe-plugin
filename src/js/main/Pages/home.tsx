@@ -2,35 +2,21 @@ import React from 'react';
 import { Hero, Service } from '../components'
 
 interface HomeProps {
-    section?: 'hero' | 'service';
+    height: number;
 }
 
-export const Home: React.FC<HomeProps> = ({ section }) => {
-    if (section === 'hero') {
-        return (
-            <div className="h-full w-full">
-                <Hero />
-            </div>
-        );
-    }
-    
-    if (section === 'service') {
-        return (
-            <div className="h-full w-full">
-                <Service />
-            </div>
-        );
-    }
+export const Home: React.FC<HomeProps> = ({ height }) => {
+    const heroSectionHeight = Math.floor(height * 0.4);
+    const serviceSectionHeight = height - heroSectionHeight;
 
-    // Default: render both sections (fallback)
     return (
         <div className="flex-1 flex flex-col h-full">
-            <div className="h-2/5">
+            <div style={{ height: heroSectionHeight }}>
                 <Hero />
             </div>
-            <div className="h-3/5">
+            <div style={{ height: serviceSectionHeight }}>
                 <Service />
             </div>
         </div>
-    )
+    );
 }

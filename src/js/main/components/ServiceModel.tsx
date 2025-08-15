@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Mic, Play, CheckCircle, ChevronDown } from 'lucide-react';
-import { BRAND_COLORS, UI_COLORS } from '../utils/colors';
+import { BRAND_COLORS, UI_COLORS } from '../constants';
 import { Button, GradientIcon } from './common';
 
 import { saveBase64File } from '../utils'
@@ -50,7 +50,7 @@ export const ServiceModel = () => {
                     id="message" 
                     value={text}
                     onChange={(event) => setText(event.target.value)} 
-                    className="w-full p-4 text-sm text-white bg-black/40 rounded-xl border border-white/20 focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary/50 backdrop-blur-sm placeholder:text-gray-500 transition-all duration-200 resize-none" 
+                    className="w-full p-4 text-sm text-white bg-black/60 rounded-xl border border-alpha-20 focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary/50 placeholder:text-gray-500 transition-colors-opacity resize-none" 
                     placeholder="Enter your text to convert to speech..."
                     rows={3}
                 />
@@ -65,7 +65,7 @@ export const ServiceModel = () => {
                         id="voice-select" 
                         value={voiceId}
                         onChange={(event) => setVoiceId(event.target.value)} 
-						className="w-full appearance-none bg-black/40 border border-white/20 text-white text-sm rounded-xl focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary/50 p-4 backdrop-blur-sm transition-all duration-200 cursor-pointer select-options"
+						className="w-full appearance-none bg-black/60 border border-alpha-20 text-white text-sm rounded-xl focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary/50 p-4 transition-colors-opacity cursor-pointer select-options"
                     >
 						<option value="" className="bg-gray-900 text-gray-400" disabled>Choose a voice model...</option>
                         {voices.map((voice, index) => (
@@ -96,7 +96,7 @@ export const ServiceModel = () => {
             </div>
             
             {resAudio && (
-                <div className="bg-white/5 rounded-xl p-4 border border-white/10 mt-6">
+                <div className="bg-white/5 rounded-xl p-4 border border-alpha-10 mt-6">
                     <div className="flex items-center gap-3 mb-3">
                         <GradientIcon size="sm" fromColor="from-ui-success/20" toColor="to-ui-success/20" className="bg-ui-success/20">
                             <CheckCircle className="w-4 h-4" color={UI_COLORS.SUCCESS} />

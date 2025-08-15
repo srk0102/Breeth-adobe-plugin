@@ -2,9 +2,9 @@
 
 import { ns } from "../shared/shared";
 
-import * as aeft from "./aeft/aeft";
-import * as phxs from "./phxs/phxs";
-import * as ppro from "./ppro/ppro";
+import * as aeft from "./aeft/aeft"; 
+import * as phxs from "./phxs/phxs"; 
+import * as ppro from "./ppro/ppro"; 
 
 //@ts-ignore
 const host = typeof $ !== "undefined" ? $ : window;
@@ -60,6 +60,13 @@ switch (getAppNameSafely()) {
   case "aftereffectsbeta":
     host[ns] = aeft;
     break;
+
+  
+  
+  
+  
+  
+  
   case "photoshop":
   case "photoshopbeta":
     host[ns] = phxs;
@@ -71,7 +78,13 @@ switch (getAppNameSafely()) {
     break;
 }
 
-export type Scripts = typeof aeft & typeof ppro & typeof phxs
+const empty = {};
+// prettier-ignore
+export type Scripts = typeof empty
+  & typeof aeft 
+  & typeof phxs 
+  & typeof ppro 
+  ;
 
 // https://extendscript.docsforadobe.dev/interapplication-communication/bridgetalk-class.html?highlight=bridgetalk#appname
 type ApplicationName =

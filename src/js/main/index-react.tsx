@@ -7,7 +7,7 @@ import "./index.css";
 
 initBolt();
 
-ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+ReactDOM.createRoot(document.getElementById("app") as HTMLElement).render(
   <React.StrictMode>
     <App />
   </React.StrictMode>

@@ -1,4 +1,4 @@
-@theme {
+:root {
   /* Brand Colors */
   --color-brand-primary: #a855f7;
   --color-brand-secondary: #8b5cf6;
@@ -15,6 +15,18 @@
   --color-ui-warning: #f59e0b;
   --color-ui-error: #ef4444;
   --color-ui-info: #3b82f6;
+
+  /* Shared border alpha tokens for CEF */
+  --border-alpha-5: rgba(255,255,255,0.05);
+  --border-alpha-8: rgba(255,255,255,0.08);
+  --border-alpha-10: rgba(255,255,255,0.10);
+  --border-alpha-12: rgba(255,255,255,0.12);
+  --border-alpha-15: rgba(255,255,255,0.15);
+  --border-alpha-20: rgba(255,255,255,0.20);
+
+  /* Beam divider strengths derived from brand primary */
+  --beam-weak: rgba(168, 85, 247, 0.10);
+  --beam-strong: rgba(168, 85, 247, 0.28);
 }
 
 /* Custom gradient utilities for Tailwind 4.1 */
@@ -36,4 +48,17 @@
 
 .bg-image-gradient {
   background: linear-gradient(135deg, var(--color-file-image), #67e8f9);
+}
+
+/* Explicit transition utilities (avoid transition-all for CEF performance) */
+.transition-colors-opacity {
+  transition-property: color, background-color, border-color, opacity;
+  transition-duration: 200ms;
+  transition-timing-function: ease;
+}
+
+.transition-transform-opacity {
+  transition-property: transform, opacity;
+  transition-duration: 200ms;
+  transition-timing-function: ease;
 }
