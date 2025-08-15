@@ -18,11 +18,11 @@ export const GradientIcon: React.FC<GradientIconProps> = ({
   children,
   size = 'md',
   className = '',
-  fromColor = 'from-brand-primary',
-  toColor = 'to-brand-secondary'
+  fromColor = 'bg-brand-gradient',
+  toColor = ''
 }) => {
   return (
-    <div className={`bg-gradient-to-br ${fromColor} ${toColor} rounded-xl flex items-center justify-center ${sizeClasses[size]} ${className}`}>
+    <div className={`${fromColor} ${toColor} rounded-xl flex items-center justify-center ${sizeClasses[size]} ${className}`}>
       {children}
     </div>
   );

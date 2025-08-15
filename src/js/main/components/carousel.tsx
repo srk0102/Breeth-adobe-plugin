@@ -1,28 +1,7 @@
 import React, { useState } from 'react';
 import { getFileBufferBase64 } from '../utils/commonFunctions';
-import { PreviewModal, ClipItem } from './common';
-
-interface Clip {
-    name: string;
-    filePath: string;
-    assetDuration: number;
-    fileData?: string;
-    timelineInpoint?: number;
-    timelineoutPoint?: number;
-    assetInpoint?: number;
-    assetOutpoint?: number;
-}
-
-interface PreviewClip {
-    name: string;
-    filePath: string;
-    fileData?: string;
-    type: string;
-    timelineInpoint?: number;
-    timelineoutPoint?: number;
-    assetInpoint?: number;
-    assetOutpoint?: number;
-}
+import { PreviewModal, ClipItem, GradientIcon } from './common';
+import type { Clip, PreviewClip } from './types/components';
 
 interface CarouselWithContentProps {
     clips: Clip[];
@@ -70,7 +49,7 @@ export function CarouselWithContent({ clips }: CarouselWithContentProps) {
     return (
         <div className="w-full h-full flex flex-col">
             {clips?.length > 0 ? (
-                <div className="space-y-2 overflow-y-auto no-scrollbar flex-1">
+                <div className="overflow-y-auto no-scrollbar flex-1">
                     {clips.map((clip: Clip, index: number) => (
                         <ClipItem
                             key={index}
@@ -82,9 +61,9 @@ export function CarouselWithContent({ clips }: CarouselWithContentProps) {
             ) : (
                 <div className="flex-1 flex items-center justify-center">
                     <div className="text-center text-gray-400">
-                        <div className="w-16 h-16 bg-gray-800/50 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                        <GradientIcon size="lg" className="w-16 h-16 rounded-2xl mx-auto mb-4" fromColor="bg-brand-gradient">
                             <span className="text-2xl">🎬</span>
-                        </div>
+                        </GradientIcon>
                         <p className="text-lg font-medium mb-2 text-gray-300">No files selected</p>
                         <p className="text-sm text-gray-500">Select files in your workspace to see them here</p>
                     </div>

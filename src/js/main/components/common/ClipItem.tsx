@@ -1,13 +1,12 @@
 import React from 'react';
 import { Play, Eye, Film, Music, Image } from 'lucide-react';
-import { FILE_COLORS } from '../../utils/colors';
+import { FILE_COLORS } from '../../constants'
+import type { Clip } from '../types/components';
+
+import { PreviewIcon } from './PreviewIcon';
 
 interface ClipItemProps {
-  clip: {
-    name: string;
-    filePath: string;
-    assetDuration: number;
-  };
+  clip: Clip;
   onPreview: () => void;
 }
 
@@ -34,33 +33,6 @@ export const ClipItem: React.FC<ClipItemProps> = ({ clip, onPreview }) => {
     return 'Unknown';
   };
 
-  const getPreviewIcon = () => {
-    const extension = clip.filePath.split('.').pop()?.toLowerCase() || '';
-    
-    if (videoFormats.includes(extension)) {
-      return (
-        <>
-          <Play className="w-4 h-4" color={FILE_COLORS.VIDEO} />
-          <span>Preview</span>
-        </>
-      );
-    }
-    if(audioFormats.includes(extension)){
-      return (
-        <>
-          <Play className="w-4 h-4" color={FILE_COLORS.AUDIO} />
-          <span>Preview</span>
-        </>
-      );
-    }
-    return (
-      <>
-        <Eye className="w-4 h-4" color={FILE_COLORS.IMAGE} />
-        <span>View</span>
-      </>
-    );
-  };
-
   const formatDuration = (seconds: number) => {
     if (!seconds || seconds === 0) return '-';
     const minutes = Math.floor(seconds / 60);
@@ -69,7 +41,7 @@ export const ClipItem: React.FC<ClipItemProps> = ({ clip, onPreview }) => {
   };
 
   return (
-    <div className="flex items-center gap-4 p-4 bg-white/5 hover:bg-white/10 transition-all duration-300 group gradient-border-top-bottom rounded-lg">
+    <div className="flex items-center gap-4 p-4 transition-colors-opacity group rounded-lg beam-divider">
       <div className="flex-shrink-0">
         <span className="text-xl">{getFileIcon()}</span>
       </div>
@@ -91,9 +63,9 @@ export const ClipItem: React.FC<ClipItemProps> = ({ clip, onPreview }) => {
       <div className="flex-shrink-0">
         <button
           onClick={onPreview}
-          className="flex items-center gap-2 text-white bg-brand-primary/20 hover:bg-brand-primary/30 border border-brand-primary/50 hover:border-brand-primary px-3 py-2 rounded-lg text-xs font-medium transition-all duration-200 backdrop-blur-sm"
+          className="flex items-center gap-2 text-white hover:bg-brand-primary/30 border border-brand-primary/50 hover:border-brand-primary px-3 py-2 rounded-lg text-xs font-medium transition-colors-opacity"
         >
-          {getPreviewIcon()}
+          <PreviewIcon filePath={clip.filePath} />
         </button>
       </div>
     </div>

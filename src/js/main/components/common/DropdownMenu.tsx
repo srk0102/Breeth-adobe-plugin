@@ -32,12 +32,12 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
       </div>
       
       {isOpen && (
-        <div className={`absolute ${positionClasses} top-full mt-2 bg-gradient-to-b from-gray-900 to-black backdrop-blur-xl rounded-xl shadow-2xl border border-white/15 min-w-48 overflow-hidden z-[9999] ${menuClassName}`}>
+        <div className={`absolute ${positionClasses} top-full mt-2 bg-black/90 rounded-xl shadow-2xl border border-alpha-12 min-w-48 overflow-hidden z-[9999] ${menuClassName}`}>
           <div className="p-2">
             {items.map((item, index) => (
               <button
                 key={index}
-                className="flex items-center gap-3 text-gray-300 hover:text-white hover:bg-brand-primary/10 px-4 py-3 rounded-lg cursor-pointer transition-all duration-200 w-full text-left"
+                className="flex items-center gap-3 text-gray-300 hover:text-white hover:bg-brand-primary/10 px-4 py-3 rounded-lg cursor-pointer transition-colors-opacity w-full text-left"
                 onClick={() => {
                   item.onClick();
                   setIsOpen(false);

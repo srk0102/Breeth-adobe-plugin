@@ -40,20 +40,19 @@ export const Modal: React.FC<ModalProps> = ({
 
   return createPortal(
     <div 
-      className="fixed inset-0 bg-black/90 backdrop-blur-xl grid place-items-center z-[2147483647] p-4"
+      className="fixed inset-0 bg-black/90 grid place-items-center z-[2147483647] p-4"
       onClick={handleBackdropClick}
     >
-      <div className={`gradient-border ${sizeClasses[size]} ${className}`}>
-        <div className="gradient-border-inner flex flex-col max-h-[90vh]">
+      <div className={`${sizeClasses[size]} ${className} rounded-xl border border-alpha-10 bg-black/80 flex flex-col max-h-[90vh]`}>
           {(title || showCloseButton) && (
-            <div className="flex w-full justify-between items-center p-6 border-b border-white/10 gap-4">
+            <div className="flex w-full justify-between items-center p-6 border-b border-alpha-10 gap-4">
               {title && (
                 <h2 className="text-lg font-semibold text-white">{title}</h2>
               )}
               {showCloseButton && (
                 <button
                   onClick={onClose}
-                  className="ml-auto text-white hover:text-white hover:bg-white/10 p-2 rounded-lg transition-all duration-200 flex items-center justify-center w-8 h-8"
+                  className="ml-auto text-white hover:text-white hover:bg-white/10 p-2 rounded-lg transition-colors-opacity flex items-center justify-center w-8 h-8"
                   title="Close"
                 >
                   <X className="w-5 h-5" color="white" />
@@ -64,7 +63,6 @@ export const Modal: React.FC<ModalProps> = ({
           <div className="flex-1 overflow-auto">
             {children}
           </div>
-        </div>
       </div>
     </div>,
     document.body

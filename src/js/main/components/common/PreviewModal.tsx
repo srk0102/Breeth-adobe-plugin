@@ -37,7 +37,7 @@ export const PreviewModal: React.FC<PreviewModalProps> = ({ isOpen, onClose, cli
       onClose={onClose}
       className="h-[500px]"
     >
-      <div className="flex w-full justify-between items-center p-6 border-b border-white/10 gap-4">
+      <div className="flex w-full justify-between items-center p-6 border-b border-alpha-10 gap-4">
         <div className="flex items-center gap-4">
           <GradientIcon>
             <Eye className="w-5 h-5" color="white" />
