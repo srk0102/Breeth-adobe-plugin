@@ -1,66 +1,11 @@
-export const getSelectedClips = () => {
-    try {
-        if (app.project.activeSequence) {
-            var sequence = app.project.activeSequence;
-            var selectedClips = [];
-            var videoTracks = sequence.videoTracks;
-            var audioTracks = sequence.audioTracks;
-            var maxTracks = Math.max(videoTracks.numTracks, audioTracks.numTracks);
-            
-            // Single loop to process both video and audio tracks
-            for (var i = 0; i < maxTracks; i++) {
-                // Process video track if it exists
-                if (i < videoTracks.numTracks) {
-                    var videoTrack = videoTracks[i];
-                    for (var j = 0; j < videoTrack.clips.numItems; j++) {
-                        var videoClip = videoTrack.clips[j];
-                        if (videoClip.isSelected()) {
-                            selectedClips[selectedClips.length] = {
-                                name: videoClip.name,
-                                type: "video",
-                                timelineInpoint: videoClip.start.seconds,
-                                timelineoutPoint: videoClip.end.seconds,
-                                assetInpoint: videoClip.inPoint.seconds,
-                                assetOutpoint: videoClip.outPoint.seconds,
-                                assetDuration: videoClip.duration.seconds,
-                                filePath: videoClip.projectItem.getMediaPath(),
-                                trackIndex: i
-                            };
-                        }
-                    }
-                }
-                
-                // Process audio track if it exists
-                if (i < audioTracks.numTracks) {
-                    var audioTrack = audioTracks[i];
-                    for (var k = 0; k < audioTrack.clips.numItems; k++) {
-                        var audioClip = audioTrack.clips[k];
-                        if (audioClip.isSelected()) {
-                            selectedClips[selectedClips.length] = {
-                                name: audioClip.name,
-                                type: "audio",
-                                timelineInpoint: audioClip.start.seconds,
-                                timelineoutPoint: audioClip.end.seconds,
-                                assetInpoint: audioClip.inPoint.seconds,
-                                assetOutpoint: audioClip.outPoint.seconds,
-                                assetDuration: audioClip.duration.seconds,
-                                filePath: audioClip.projectItem.getMediaPath(),
-                                trackIndex: i
-                            };
-                        }
-                    }
-                }
-            }
-
-            return selectedClips;
-        } else {
-            return [];
-        }
-    } catch (e:any) {
-        alert("Error getting selected clips: " + String(e.message || e));
-        return [];
-    }
-}
+export * from "./markers";
+export * from "./tracks";
+export * from "./motionGraphics";
+export * from "./sequenceOperations";
+export * from "./clipEffects";
+export * from "./clipProperties";
+export * from "./timelineOperations";
+export * from "./trackOperations";
 
 export const getProjectDirectory = () => {
     if (app.project && app.project.path) {

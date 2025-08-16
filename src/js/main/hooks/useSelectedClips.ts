@@ -7,7 +7,7 @@ export function useSelectedClips() {
 
   const fetchSelectedClips = useCallback(async () => {
     try {
-      const selected: SelectedClip[] = await evalTS('getSelectedClips');
+      const selected: SelectedClip[] = await evalTS('getAllSelectedClips');
       setClips(Array.isArray(selected) ? selected : []);
     } catch (error) {
       console.error('Error fetching selected clips:', error);
