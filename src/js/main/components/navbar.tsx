@@ -9,7 +9,7 @@ export const NavBar = () => {
     {
       icon: <Settings className="w-4 h-4" color={UI_COLORS.INFO} />,
       label: 'Settings',
-      onClick: () => console.log('Settings clicked')
+      onClick: () => window.open('https://breeth.framer.website/', '_blank')
     },
     {
       icon: <Info className="w-4 h-4" color={UI_COLORS.SUCCESS} />,
@@ -28,18 +28,6 @@ export const NavBar = () => {
       <div className="flex items-center gap-3">
         <img src={logoDark} alt="Breeth" className="w-8 h-8 object-contain" />
         <span className="text-xl font-bold tracking-tight text-white">BREETH</span>
-      </div>
-
-      <div className="hidden md:flex items-center gap-8">
-        <a href="#" className="text-gray-300 hover:text-brand-primary transition-colors-opacity text-sm font-medium">
-          Home
-        </a>
-        <a href="#" className="text-gray-300 hover:text-brand-primary transition-colors-opacity text-sm font-medium">
-          About
-        </a>
-        <a href="#" className="text-gray-300 hover:text-brand-primary transition-colors-opacity text-sm font-medium">
-          Contact
-        </a>
       </div>
 
       <DropdownMenu
