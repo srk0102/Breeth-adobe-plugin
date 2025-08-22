@@ -1,13 +1,14 @@
 import { useCallback, useEffect, useState } from 'react';
 import { evalTS } from '../../lib/utils/bolt';
 import type { SelectedClip } from '../components/types/components';
+import type { Clip } from '../components/types/components';
 
 export function useSelectedClips() {
   const [clips, setClips] = useState<SelectedClip[]>([]);
 
   const fetchSelectedClips = useCallback(async () => {
     try {
-      const selected: SelectedClip[] = await evalTS('getSelectedClips');
+      const selected: SelectedClip[] = await evalTS('getAllSelectedClips');
       setClips(Array.isArray(selected) ? selected : []);
     } catch (error) {
       console.error('Error fetching selected clips:', error);
@@ -24,7 +25,7 @@ export function useSelectedClips() {
     };
   }, [fetchSelectedClips]);
 
-  return { clips, fetchSelectedClips } as const;
+  return { clips: clips as Clip[], fetchSelectedClips } as const;
 }
 
 
