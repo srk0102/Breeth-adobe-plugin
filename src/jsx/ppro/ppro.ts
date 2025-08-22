@@ -1,11 +1,7 @@
-export * from "./markers";
-export * from "./tracks";
-export * from "./motionGraphics";
-export * from "./sequenceOperations";
-export * from "./clipEffects";
-export * from "./clipProperties";
-export * from "./timelineOperations";
-export * from "./trackOperations";
+export * from "./timeLineOperations";
+export * from "./motionGraphicsOperations";
+export * from "./fileOperations";
+export * from "./binOperations";
 
 export const getProjectDirectory = () => {
     if (app.project && app.project.path) {

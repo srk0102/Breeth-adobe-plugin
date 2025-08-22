@@ -1,4 +1,4 @@
-import { TrackType, TimelineMap, TimelineTrack, TimelineClip, TimelineComponent, TimelineComponentProperty } from './types';
+import { TrackType, TimelineMap, TimelineTrack, TimelineClip, TimelineComponent, TimelineComponentProperty } from '../types';
 
 function collectionToArray(collection: any) {
     var result = [];

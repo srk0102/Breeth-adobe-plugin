@@ -1,4 +1,4 @@
-import { TrackType } from './types';
+import { TrackType } from '../types';
 
 /**
  * Gets a clip's media path
