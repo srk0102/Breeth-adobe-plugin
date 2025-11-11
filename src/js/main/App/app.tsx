@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home } from '../Pages';
+import { ChatPage } from '../Pages';
 import { NavBar } from '../components';
 import { usePanelDimensions } from '../hooks/usePanelDimensions';
 
@@ -21,7 +21,7 @@ const App: React.FC = () => {
 					<div style={{ height: navbarHeight }}>
 						<NavBar />
 					</div>
-					<Home height={contentHeight} />
+					<ChatPage height={contentHeight} />
 				</div>
 			</div>
 		</>
