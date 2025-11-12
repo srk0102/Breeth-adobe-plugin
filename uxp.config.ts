@@ -114,6 +114,8 @@ const manifest: UXP_Manifest = {
         "https://reactjs.org",
         "https://vuejs.org/",
         `ws://localhost:${extraPrefs.hotReloadPort}`, // Required for hot reload
+        "http://localhost:8000", // AI Backend
+        "http://127.0.0.1:8000", // AI Backend (IP address)
       ],
     },
     clipboard: "readAndWrite",
